@@ -4,7 +4,7 @@
   "description": "A helper for node.js/Handlebars projects to import template files directly form inside another template.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "node_modules/.bin/mocha -w"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,9 @@
     "url": "https://github.com/sreenaths/handlebars-helper-import/issues"
   },
   "homepage": "https://github.com/sreenaths/handlebars-helper-import#readme",
-  "dependencies": {
-    "handlebars": "^4.0.6"
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "handlebars": "^4.0.6",
+    "mocha": "^3.2.0"
   }
 }
