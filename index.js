@@ -15,7 +15,7 @@ function normalizeFilePath(filePath) {
       }
     }
     else {
-      throw new Error("Invalid extension : " + filePath);
+      throw new Error("handlebars-helper-import: Invalid extension : " + filePath);
     }
   }
   else {
@@ -38,7 +38,7 @@ function normalizeFilePath(filePath) {
     }
   }
 
-  throw new Error("File not found : " + filePath);
+  throw new Error("handlebars-helper-import: File not found : " + filePath);
 }
 
 function getTemplate(handlebars, filePath) {
@@ -55,7 +55,7 @@ module.exports = function (handlebars) {
     var context = Object.create(this);
 
     if (typeof filePath !== 'string') {
-      return '';
+      throw new Error("handlebars-helper-import: Path must be a string. But its " + filePath);
     }
 
     if(!path.isAbsolute(filePath)) {

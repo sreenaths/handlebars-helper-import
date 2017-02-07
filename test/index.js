@@ -32,4 +32,28 @@ describe('import helper', function () {
 
     assert.equal(template(ctx), "[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index");
   });
+
+  it('Test error conditions', function () {
+    var ctx = {},
+        template;
+
+    // File not found
+    template = handlebars.compile('{{import "test/no-template"}}');
+    assert.throws(function () {
+      template(ctx)
+    });
+
+    // Invalid extension
+    template = handlebars.compile('{{import "test/invalid.ext"}}');
+    assert.throws(function () {
+      template(ctx)
+    });
+
+    // Path must be a string
+    template = handlebars.compile('{{import 1}}');
+    assert.throws(function () {
+      template(ctx)
+    });
+  });
+
 });
