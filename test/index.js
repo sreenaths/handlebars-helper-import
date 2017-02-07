@@ -11,7 +11,12 @@ describe('import helper', function () {
 
   it('Test import', function () {
     var ctx = {
-          txt: "foo"
+          f1: "Foo 1",
+          f2: "Foo 2",
+
+          b1: "Bar 1",
+          b2: "Bar 2",
+          b3: "Bar 3",
         },
         /**
           We have 3 levels of files - top, mid & bottom. And the imports are as follows.
