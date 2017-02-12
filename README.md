@@ -47,15 +47,15 @@ You can register and use **handlebars-helper-import** from node.js just like oth
   - Take care to not create cyclic imports.
   - Thus your template files can form an acyclic graph or a tree relation, with each file as a node.
 - File Paths:
-  - For the first or the top most import, they must be relative to CWD.
+  - For the first (the top most / non-nested) imports the paths must be relative to CWD (Current Working Directory).
   - In nested imports you can use paths relative to its parent template.
   - If you give a directory name as path, the helper would expect an index template file in it.
   - You can always use absolute paths (/ starts from CWD).
-- File could be of **.hbs** or **.handlebars** extension and the helper would detect it.
+- Template file could be of **.hbs** or **.handlebars** extension and the helper would automatically detect it without specifying.
 - Helper would throw Errors in the following conditions:
   - If path passed is not of type string.
   - If file is not found.
-  - If extension passed with path is not .hsb or .handlebars.
+  - If file extension is passed in path and it's not .hsb or .handlebars.
 - Please refer the test code for more insight.
 
 #### Block support
