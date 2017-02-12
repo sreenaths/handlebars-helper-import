@@ -42,18 +42,7 @@ You can register and use **handlebars-helper-import** from node.js just like oth
     {{import 'directory_path'}} // To import /tmp/templates_dir/directory_path/index.(hbs OR handlebars)
 ```
 
-Simple JavaScript code to convert a foo.hbs with all its nested imports into HTML:
-```js
-// Assuming your script is in /tmp/index.js and foo.hbs in /tmp/templates_dir/ - (CWD = /tmp).
-var template = handlebars.compile('{{import "templates_dir/foo"}}'); // Will imports /tmp/templates_dir/foo.(hbs OR handlebars) file
-var context = {
-  // Key-Values to be used in foo.hbs or inner/nested templates
-};
-template(context) // Returns you the HTML made from your template foo
-```
-
-
-- You can nest imports. That is use **import** inside templates that were imported using **import**.
+- You can nest imports. That is use **import** inside templates that were imported using **import**!
 - File Paths:
   - For the top most import, they must be relative to CWD.
   - In nested imports you can use paths relative to its parent template.
@@ -65,6 +54,16 @@ template(context) // Returns you the HTML made from your template foo
   - If file is not found.
   - If extension passed with path is not .hsb or .handlebars.
 - Please refer the test code for more insight.
+
+Simple JavaScript code to convert a foo.hbs with all its nested imports into HTML:
+```js
+// Assuming your script is in /tmp/index.js and foo.hbs in /tmp/templates_dir/ - (CWD = /tmp).
+var template = handlebars.compile('{{import "templates_dir/foo"}}'); // Will imports /tmp/templates_dir/foo.(hbs OR handlebars) file
+var context = {
+  // Key-Values to be used in foo.hbs or inner/nested templates
+};
+template(context) // Returns you the HTML made from your template foo
+```
 
 ## Running tests
 Install dependencies.
@@ -78,4 +77,5 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ## License
 Copyright (c) 2017 Sreenath Somarajapuram
+
 Released under the MIT license
