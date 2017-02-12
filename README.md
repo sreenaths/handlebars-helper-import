@@ -42,9 +42,12 @@ You can register and use **handlebars-helper-import** from node.js just like oth
     {{import 'directory_path'}} // To import /tmp/templates_dir/directory_path/index.(hbs OR handlebars)
 ```
 
-- You can nest imports. That is use **import** inside templates that were imported using **import**!
+- You can nest imports:
+  - i.e. you can **import** templates from inside templates that were imported using **import**!
+  - Take care to not create cyclic imports.
+  - Thus your template files can form an acyclic graph or a tree relation, with each file as a node.
 - File Paths:
-  - For the top most import, they must be relative to CWD.
+  - For the first or the top most import, they must be relative to CWD.
   - In nested imports you can use paths relative to its parent template.
   - If you give a directory name as path, the helper would expect an index template file in it.
   - You can always use absolute paths (/ starts from CWD).
