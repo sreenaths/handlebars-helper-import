@@ -1,10 +1,10 @@
 {
   "name": "handlebars-helper-import",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A helper for node.js/Handlebars projects to import template files directly form inside another template.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha -w"
+    "test": "node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
