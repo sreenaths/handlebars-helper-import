@@ -31,6 +31,23 @@ describe('import helper', function () {
         template = handlebars.compile('{{import "test/templates"}}');
 
     assert.equal(template(ctx), "[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index");
+
+    // Relative path
+    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "./"}}]{{/import}}');
+    assert.equal(template(ctx), "[Block1[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]][Block2[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]]");
+
+    // Absolute path
+    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "/test/templates"}}]{{/import}}');
+    assert.equal(template(ctx), "[Block1[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]][Block2[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]]");
+
+    // Plain Text
+    template = handlebars.compile('{{#import "test/templates/block"}}[foo.bar]{{/import}}');
+    assert.equal(template(ctx), "[Block1[foo.bar]][Block2[foo.bar]]");
+
+    // Nested block import
+    template = handlebars.compile('{{#import "test/templates/block_nested"}}[foo.bar]{{/import}}');
+    assert.equal(template(ctx), "[Block1[foo.bar]][Block2[foo.bar]]");
+
   });
 
   it('Test error conditions', function () {

@@ -1,6 +1,7 @@
 'use strict';
 
 const DIR_KEY = "__dir__";
+const FN_KEY = "__fn__";
 
 var fs = require('fs'),
     path = require('path');
@@ -51,19 +52,28 @@ module.exports = function (handlebars) {
     throw new Error("Handlebars not passed!");
   }
 
-  return function (filePath) {
-    var context = Object.create(this);
+  return function (filePath, options) {
+    var context = Object.create(this),
+        directory = process.cwd();
 
-    if (typeof filePath !== 'string') {
+    if(typeof filePath === 'object' && context[FN_KEY]) {
+      return context[FN_KEY](context);
+    }
+    else if (typeof filePath !== 'string') {
       throw new Error("handlebars-helper-import: Path must be a string. But its " + filePath);
     }
 
-    if(!path.isAbsolute(filePath)) {
-      filePath = path.join(this[DIR_KEY] || process.cwd(), filePath);
+    if(!path.isAbsolute(filePath) && this[DIR_KEY]) {
+      directory = this[DIR_KEY];
     }
-    filePath = normalizeFilePath(filePath);
+
+    filePath = normalizeFilePath(path.join(directory, filePath));
 
     context[DIR_KEY] = path.dirname(filePath);
+
+    if(options.fn) {
+      context[FN_KEY] = options.fn;
+    }
 
     return getTemplate(handlebars, filePath)(context);
   };

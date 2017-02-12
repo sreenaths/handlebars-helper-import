@@ -47,7 +47,7 @@ You can register and use **handlebars-helper-import** from node.js just like oth
   - For the top most import, they must be relative to CWD.
   - In nested imports you can use paths relative to its parent template.
   - If you give a directory name as path, the helper would expect an index template file in it.
-  - You can always use absolute paths.
+  - You can always use absolute paths (/ starts from CWD).
 - File could be of **.hbs** or **.handlebars** extension and the helper would detect it.
 - Helper would throw Errors in the following conditions:
   - If path passed is not of type string.
@@ -55,7 +55,19 @@ You can register and use **handlebars-helper-import** from node.js just like oth
   - If extension passed with path is not .hsb or .handlebars.
 - Please refer the test code for more insight.
 
-Simple JavaScript code to convert a foo.hbs with all its nested imports into HTML:
+#### Block support
+You can use import (Or the name you have registered the helper with) as a block helper.
+```hbs
+{{#import 'templates_dir/block'}}DEF{{/import}}
+```
+Now in templates_dir/block.hbs use **{{import}}** without any argument to get the value that's inside the block. In this case 'DEF'. So if templates_dir/block.hbs is as follows. The above above templates will give **ABCDEFGHI** as output.
+```hbs
+ABC{{import}}GHI
+```
+**{{import}}** would work in templates nested (to any level) inside templates_dir/block.
+
+
+#### Simple JavaScript code to convert a foo.hbs with all its nested imports into HTML:
 ```js
 // Assuming your script is in /tmp/index.js and foo.hbs in /tmp/templates_dir/ - (CWD = /tmp).
 var template = handlebars.compile('{{import "templates_dir/foo"}}'); // Will imports /tmp/templates_dir/foo.(hbs OR handlebars) file
