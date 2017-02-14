@@ -1,6 +1,6 @@
 {
   "name": "handlebars-helper-import",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A helper for nodejs/Handlebars projects to import template files directly form inside another template. Its like partials that need not be registered.",
   "main": "index.js",
   "scripts": {

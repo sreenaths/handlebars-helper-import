@@ -21,24 +21,24 @@ describe('import helper', function () {
         /**
           We have 3 levels of files - top, mid & bottom. And the imports are as follows.
           index
-           ├── mid 1
-           │    └── bottom 1
+           ├── foo 1
+           │    └── bar 1
            │
-           └── mid2
-                ├── bottom 2
-                └── bottom 3
+           └── foo 2
+                ├── bar 2
+                └── bar 3
          */
         template = handlebars.compile('{{import "test/templates"}}');
 
-    assert.equal(template(ctx), "[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index");
+    assert.equal(template(ctx), "<div>Bar 1 in Foo 1</div> and <div>Bar 2 and Bar 3 in Foo 2</div> in Index");
 
     // Relative path
-    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "./"}}]{{/import}}');
-    assert.equal(template(ctx), "[Block1[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]][Block2[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]]");
+    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "bars"}}]{{/import}}');
+    assert.equal(template(ctx), "[Block1[Bar 1]][Block2[Bar 1]]");
 
     // Absolute path
-    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "/test/templates"}}]{{/import}}');
-    assert.equal(template(ctx), "[Block1[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]][Block2[[Bar 1 in Foo 1] and [Bar 2 and Bar 3 in Foo 2] in Index]]");
+    template = handlebars.compile('{{#import "test/templates/block"}}[{{import "/test/templates/bars"}}]{{/import}}');
+    assert.equal(template(ctx), "[Block1[Bar 1]][Block2[Bar 1]]");
 
     // Plain Text
     template = handlebars.compile('{{#import "test/templates/block"}}[foo.bar]{{/import}}');

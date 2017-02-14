@@ -75,6 +75,6 @@ module.exports = function (handlebars) {
       context[FN_KEY] = options.fn;
     }
 
-    return getTemplate(handlebars, filePath)(context);
+    return new handlebars.SafeString(getTemplate(handlebars, filePath)(context));
   };
 };
