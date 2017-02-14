@@ -57,7 +57,7 @@ module.exports = function (handlebars) {
         directory = process.cwd();
 
     if(typeof filePath === 'object' && context[FN_KEY]) {
-      return context[FN_KEY](context);
+      return new handlebars.SafeString(context[FN_KEY](context));
     }
     else if (typeof filePath !== 'string') {
       throw new Error("handlebars-helper-import: Path must be a string. But its " + filePath);

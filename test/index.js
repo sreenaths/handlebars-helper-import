@@ -45,8 +45,8 @@ describe('import helper', function () {
     assert.equal(template(ctx), "[Block1[foo.bar]][Block2[foo.bar]]");
 
     // Nested block import
-    template = handlebars.compile('{{#import "test/templates/block_nested"}}[foo.bar]{{/import}}');
-    assert.equal(template(ctx), "[Block1[foo.bar]][Block2[foo.bar]]");
+    template = handlebars.compile('{{#import "test/templates/block_nested"}}<div>foo.bar</div>{{/import}}');
+    assert.equal(template(ctx), "[Block1<div>foo.bar</div>][Block2<div>foo.bar</div>]");
 
   });
 
